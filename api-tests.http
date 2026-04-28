@@ -1,0 +1,50 @@
+# HTTP test requests for hybrid servers
+
+### Variables
+@mediaServer = http://localhost:3000/api/v1
+@authServer = http://localhost:3001/api/v1
+@uplaodServer = http://localhost:3002/api/v1
+@token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo1LCJsZXZlbF9uYW1lIjoiVXNlciIsImlhdCI6MTc2ODM4MzI3NH0.V1bChZN1CYsGMkOR_YBpCgjaVDnpKlrC9FkyKXRaEIg"
+
+### Auth server
+
+### Register
+POST {{authServer}}/users
+Content-Type: application/json
+
+{
+    "username": "kala",
+    "password": "kalakala",
+    "email": "kala.kala@example.com"
+}
+
+### Login
+POST {{authServer}}/auth/login
+Content-Type: application/json
+
+{
+    "username": "kala",
+    "password": "kalakala"
+}
+
+#####################
+
+### Upload server
+
+POST {{uplaodServer}}/upload
+Content-Type: multipart/form-data; boundary=Boundary
+Authorization: Bearer {{token}}
+
+--Boundary
+Content-Disposition: form-data; name="file"; filename="image.png"
+Content-Type: image/png
+
+< ./test-cat.png
+--Boundary--
+
+#####################
+
+### Media API
+
+### Get media
+GET http://localhost:3000/api/v1/media?page=1&limit=10

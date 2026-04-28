@@ -1,0 +1,16 @@
+{
+  "name": "hybrid-server-26",
+  "workspaces": [
+    "hybrid-auth-server",
+    "hybrid-media-api",
+    "hybrid-types",
+    "hybrid-upload-server"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently --kill-others \"cd hybrid-media-api && npm run dev\" \"cd hybrid-auth-server && npm run dev\" \"cd hybrid-upload-server && npm run dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
